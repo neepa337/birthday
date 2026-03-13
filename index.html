@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+body{
+margin:0;
+font-family: 'Poppins', sans-serif;
+background:linear-gradient(135deg,#ffd1dc,#ff6b81);
+overflow:hidden;
+color:#333;
+}
+
+.page{
+display:none;
+height:100vh;
+width:100vw;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:20px;
+}
+
+.active{
+display:flex;
+}
+
+button{
+padding:12px 25px;
+border:none;
+border-radius:30px;
+background:#ff4d6d;
+color:white;
+font-size:16px;
+cursor:pointer;
+margin-top:20px;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+img{
+max-width:300px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* floating hearts */
+
+.heart{
+position:absolute;
+font-size:20px;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh)}
+100%{transform:translateY(-10vh)}
+}
+
+/* envelope */
+
+.envelope{
+position:relative;
+width:300px;
+height:200px;
+background:white;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 10px 20px rgba(0,0,0,0.2);
+cursor:pointer;
+}
+
+.flap{
+position:absolute;
+width:100%;
+height:100px;
+background:#ff6f91;
+top:0;
+transform-origin:top;
+transition:0.6s;
+}
+
+.letter{
+position:absolute;
+top:50px;
+padding:20px;
+opacity:0;
+transition:0.6s;
+}
+
+.open-envelope .flap{
+transform:rotateX(180deg);
+}
+
+.open-envelope .letter{
+opacity:1;
+}
+
+/* cake */
+
+.cake{
+position:relative;
+width:200px;
+height:120px;
+margin-top:20px;
+}
+
+.layer{
+width:200px;
+height:80px;
+background:#ff6f91;
+border-radius:10px;
+position:absolute;
+bottom:0;
+}
+
+.candles{
+position:absolute;
+top:-20px;
+width:100%;
+display:flex;
+justify-content:space-around;
+}
+
+.candle{
+width:10px;
+height:25px;
+background:white;
+position:relative;
+}
+
+.candle::after{
+content:"";
+position:absolute;
+top:-8px;
+left:2px;
+width:6px;
+height:8px;
+background:orange;
+border-radius:50%;
+animation:flicker .3s infinite alternate;
+}
+
+@keyframes flicker{
+0%{transform:scale(1)}
+100%{transform:scale(1.3)}
+}
+
+/* gift */
+
+.gift-box{
+position:relative;
+width:100px;
+height:100px;
+margin-top:20px;
+cursor:pointer;
+}
+
+.box{
+width:100px;
+height:70px;
+background:#ff4d6d;
+position:absolute;
+bottom:0;
+border-radius:10px;
+}
+
+.lid{
+width:110px;
+height:30px;
+background:#ff6f91;
+position:absolute;
+top:0;
+left:-5px;
+border-radius:10px;
+transition:.6s;
+}
+
+.open .lid{
+transform:translateY(-60px) rotate(-10deg);
+}
+
+/* grid */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(4,80px);
+gap:10px;
+margin-top:20px;
+}
+
+.boxmsg{
+background:white;
+height:80px;
+width:80px;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+padding:5px;
+font-size:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+canvas{
+position:absolute;
+top:0;
+left:0;
+pointer-events:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="confetti"></canvas>
+
+<!-- PAGE 1 -->
+
+<div class="page active" id="page1">
+
+<h1>Hey Love ❤️</h1>
+
+<p>I made something special for you</p>
+
+<button onclick="nextPage(2)">Start Your Surprise</button>
+
+</div>
+
+
+<!-- PAGE 2 PHOTO -->
+
+<div class="page" id="page2">
+
+<h2>You ❤️</h2>
+
+<img src="IMG_20260313_231624_805.jpg">
+
+<p>You make my world brighter every day.</p>
+
+<button onclick="nextPage(3)">Next</button>
+
+</div>
+
+
+<!-- PAGE 3 LETTER -->
+
+<div class="page" id="page3">
+
+<div class="envelope" onclick="openLetter()">
+
+<div class="flap"></div>
+
+<div class="letter">
+
+<h3>My Letter To You</h3>
+
+<p>
+
+Heyyyy thangooo!
+Happy Birthday Athiii🥳
+Today is your day and I wish the best for your
+future (that is me btw 😂👀)
+Be happy and smile always
+You are a gem. I am very lucky to have you in my life!
+You make me smile everyday and I am sooooooo blessed to
+have you as my boyfriend, the love of my life💋
+I miss you so much 😭
+I hope we get to meet soon!
+I love you always 🫶🏻🤍
+💋💋💋
+
+</p>
+
+</div>
+
+</div>
+
+<button onclick="nextPage(4)">Continue</button>
+
+</div>
+
+
+<!-- PAGE 4 CAKE -->
+
+<div class="page" id="page4">
+
+<h1>Happy 17th Birthday 🎂</h1>
+
+<div class="cake">
+
+<div class="layer"></div>
+
+<div class="candles">
+
+<span class="candle"></span>
+<span class="candle"></span>
+<span class="candle"></span>
+<span class="candle"></span>
+<span class="candle"></span>
+
+</div>
+
+</div>
+
+<button onclick="nextPage(5)">Open Your Gifts</button>
+
+</div>
+
+
+<!-- PAGE 5 MESSAGES -->
+
+<div class="page" id="page5">
+
+<h2>17 Little Messages ❤️</h2>
+
+<div class="grid" id="grid"></div>
+
+<div class="gift-box" onclick="openGift()">
+
+<div class="lid"></div>
+
+<div class="box"></div>
+
+</div>
+
+<p>Click the gift 🎁</p>
+
+</div>
+
+
+<!-- PAGE 6 FINAL -->
+
+<div class="page" id="page6">
+
+<h2>You Mean Everything To Me ❤️</h2>
+
+<p>Scan for a song that reminds me of you</p>
+
+<img src="https://open.spotify.com/track/43BSpcCWtZKt6HUZujyY6O?si=lOe6HatCT822CRpZFzun0g">
+
+<p>Happy Birthday 🎂❤️</p>
+
+</div>
+
+
+<audio id="music" src="music.mp3"></audio>
+
+<script>
+
+/* navigation */
+
+function nextPage(n){
+
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"))
+
+document.getElementById("page"+n).classList.add("active")
+
+document.getElementById("music").play()
+
+if(n===5)createBoxes()
+
+if(n===4)startConfetti()
+
+if(n===6)heartExplosion()
+
+}
+
+/* floating hearts */
+
+setInterval(()=>{
+
+let heart=document.createElement("div")
+
+heart.className="heart"
+
+heart.innerHTML="❤️"
+
+heart.style.left=Math.random()*100+"vw"
+
+document.body.appendChild(heart)
+
+setTimeout(()=>heart.remove(),6000)
+
+},500)
+
+/* envelope */
+
+function openLetter(){
+
+document.querySelector(".envelope").classList.add("open-envelope")
+
+}
+
+/* messages */
+
+const messages=[
+
+"You make me smile",
+"You are my favorite person",
+"I love your laugh",
+"You make life beautiful",
+"You are my comfort",
+"You understand me",
+"You make my days brighter",
+"You mean a lot to me",
+"You are special",
+"You are my happiness",
+"I love being with you",
+"You are my safe place",
+"I appreciate you",
+"You are amazing",
+"You matter to me",
+"I love you",
+"Happy 17th Birthday ❤️"
+
+]
+
+function createBoxes(){
+
+let grid=document.getElementById("grid")
+
+grid.innerHTML=""
+
+messages.forEach((m,i)=>{
+
+let box=document.createElement("div")
+
+box.className="boxmsg"
+
+box.innerText=i+1
+
+box.onclick=()=>box.innerText=m
+
+grid.appendChild(box)
+
+})
+
+}
+
+/* gift */
+
+function openGift(){
+
+document.querySelector(".gift-box").classList.add("open")
+
+setTimeout(()=>nextPage(6),1000)
+
+}
+
+/* confetti */
+
+function startConfetti(){
+
+const canvas=document.getElementById("confetti")
+
+const ctx=canvas.getContext("2d")
+
+canvas.width=window.innerWidth
+canvas.height=window.innerHeight
+
+let pieces=[]
+
+for(let i=0;i<150;i++){
+
+pieces.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+size:Math.random()*6+3,
+speed:Math.random()*3+1
+})
+
+}
+
+function update(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+pieces.forEach(p=>{
+ctx.fillStyle="white"
+ctx.fillRect(p.x,p.y,p.size,p.size)
+p.y+=p.speed
+if(p.y>canvas.height)p.y=0
+})
+
+requestAnimationFrame(update)
+
+}
+
+update()
+
+}
+
+/* heart explosion */
+
+function heartExplosion(){
+
+for(let i=0;i<60;i++){
+
+let heart=document.createElement("div")
+
+heart.innerHTML="❤️"
+
+heart.style.position="absolute"
+heart.style.left="50%"
+heart.style.top="50%"
+heart.style.fontSize=Math.random()*30+15+"px"
+
+heart.style.transform=`translate(${(Math.random()-0.5)*600}px,
+${(Math.random()-0.5)*600}px)`
+
+heart.style.transition="1s"
+
+document.body.appendChild(heart)
+
+setTimeout(()=>heart.remove(),1000)
+
+}
+
+}
+
+</script>
+
+</body>
+  </html>
